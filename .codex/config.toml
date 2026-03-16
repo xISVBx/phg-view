@@ -1,0 +1,36 @@
+version = 1
+project_name = "photogallery-frontend"
+default_language = "en"
+
+[frontend]
+framework = "react"
+bundler = "vite"
+language = "typescript"
+router = "react-router"
+state = "zustand"
+
+[api]
+openapi_url = "http://localhost:8080/swagger/doc.json"
+contract_source_of_truth = true
+
+[architecture]
+style = "feature-based"
+allow_redux = false
+allow_global_services_folder = false
+allow_root_components_folder = false
+allow_root_hooks_folder = false
+
+[codegen]
+prefer_explicit_names = true
+prefer_small_modules = true
+prefer_composition = true
+avoid_unnecessary_use_effect = true
+
+[rules]
+order = [
+  "rules/architecture.md",
+  "rules/frontend.md",
+  "rules/state-management.md",
+  "rules/api-integration.md",
+  "rules/naming.md"
+]
