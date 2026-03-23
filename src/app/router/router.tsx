@@ -1,11 +1,13 @@
 import { useEffect } from 'react';
 import { Navigate, Outlet, createBrowserRouter } from 'react-router-dom';
-import { LoginPage } from '../../features/auth/pages/login-page';
 import { useAuthStore } from '../../features/auth/store/auth.store';
-import { DashboardPage } from '../../pages/dashboard-page';
-import { WorkspacePage } from '../../pages/workspace-page';
 import { AppLayout } from '../layouts/app-layout';
+import { LazyPage, lazyPage } from './lazy-page';
 import { moduleRoutes } from './module-routes';
+
+const LoginPage = lazyPage(() => import('../../features/auth/pages/login-page'), 'LoginPage');
+const DashboardPage = lazyPage(() => import('../../pages/dashboard-page'), 'DashboardPage');
+const WorkspacePage = lazyPage(() => import('../../pages/workspace-page'), 'WorkspacePage');
 
 function ProtectedRoute() {
   const token = useAuthStore((state) => state.token);
@@ -32,7 +34,7 @@ function ProtectedRoute() {
 export const router = createBrowserRouter([
   {
     path: '/login',
-    element: <LoginPage />,
+    element: <LazyPage component={LoginPage} />,
   },
   {
     element: <ProtectedRoute />,
@@ -46,12 +48,12 @@ export const router = createBrowserRouter([
           },
           {
             path: '/dashboard',
-            element: <DashboardPage />,
+            element: <LazyPage component={DashboardPage} />,
           },
           ...moduleRoutes,
           {
             path: '/workspace/:menuCode/:subMenuCode',
-            element: <WorkspacePage />,
+            element: <LazyPage component={WorkspacePage} />,
           },
         ],
       },

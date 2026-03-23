@@ -1,24 +1,26 @@
-import type { ReactElement } from 'react';
 import { Navigate } from 'react-router-dom';
-import { AppointmentsPage } from '../../features/appointments/pages/appointments-page';
-import { AuditLogsPage } from '../../features/audit-logs/pages/audit-logs-page';
-import { CashCategoriesPage } from '../../features/cash-categories/pages/cash-categories-page';
-import { CashMovementsPage } from '../../features/cash-movements/pages/cash-movements-page';
-import { CatalogPage } from '../../features/catalog/pages/catalog-page';
-import { CategoriesPage } from '../../features/catalog-categories/pages/categories-page';
-import { ProductsPage } from '../../features/catalog-products/pages/products-page';
-import { CustomersPage } from '../../features/customers/pages/customers-page';
-import { FilesPage } from '../../features/files/pages/files-page';
-import { MenusPage } from '../../features/security-menus/pages/menus-page';
-import { PermissionsPage } from '../../features/security-permissions/pages/permissions-page';
-import { RolesPage } from '../../features/security-roles/pages/roles-page';
-import { SubmenusPage } from '../../features/security-submenus/pages/submenus-page';
-import { UsersPage } from '../../features/security-users/pages/users-page';
-import { SettingsPage } from '../../features/settings/pages/settings-page';
-import { SystemPage } from '../../features/system/pages/system-page';
-import { WorkOrdersPage } from '../../features/work-orders/pages/work-orders-page';
-import { WorkersPage } from '../../features/workers/pages/workers-page';
-import { SalesPage } from '../../features/sales/pages/sales-page';
+import type { ReactElement } from 'react';
+import { LazyPage, lazyPage } from './lazy-page';
+
+const AppointmentsPage = lazyPage(() => import('../../features/appointments/pages/appointments-page'), 'AppointmentsPage');
+const AuditLogsPage = lazyPage(() => import('../../features/audit-logs/pages/audit-logs-page'), 'AuditLogsPage');
+const CashCategoriesPage = lazyPage(() => import('../../features/cash-categories/pages/cash-categories-page'), 'CashCategoriesPage');
+const CashMovementsPage = lazyPage(() => import('../../features/cash-movements/pages/cash-movements-page'), 'CashMovementsPage');
+const CatalogPage = lazyPage(() => import('../../features/catalog/pages/catalog-page'), 'CatalogPage');
+const CategoriesPage = lazyPage(() => import('../../features/catalog-categories/pages/categories-page'), 'CategoriesPage');
+const ProductsPage = lazyPage(() => import('../../features/catalog-products/pages/products-page'), 'ProductsPage');
+const CustomersPage = lazyPage(() => import('../../features/customers/pages/customers-page'), 'CustomersPage');
+const FilesPage = lazyPage(() => import('../../features/files/pages/files-page'), 'FilesPage');
+const MenusPage = lazyPage(() => import('../../features/security-menus/pages/menus-page'), 'MenusPage');
+const PermissionsPage = lazyPage(() => import('../../features/security-permissions/pages/permissions-page'), 'PermissionsPage');
+const RolesPage = lazyPage(() => import('../../features/security-roles/pages/roles-page'), 'RolesPage');
+const SubmenusPage = lazyPage(() => import('../../features/security-submenus/pages/submenus-page'), 'SubmenusPage');
+const UsersPage = lazyPage(() => import('../../features/security-users/pages/users-page'), 'UsersPage');
+const SettingsPage = lazyPage(() => import('../../features/settings/pages/settings-page'), 'SettingsPage');
+const SystemPage = lazyPage(() => import('../../features/system/pages/system-page'), 'SystemPage');
+const WorkOrdersPage = lazyPage(() => import('../../features/work-orders/pages/work-orders-page'), 'WorkOrdersPage');
+const WorkersPage = lazyPage(() => import('../../features/workers/pages/workers-page'), 'WorkersPage');
+const SalesPage = lazyPage(() => import('../../features/sales/pages/sales-page'), 'SalesPage');
 
 type ModuleRoute = {
   path: string;
@@ -26,25 +28,25 @@ type ModuleRoute = {
 };
 
 export const moduleRoutes: ModuleRoute[] = [
-  { path: '/users', element: <UsersPage /> },
-  { path: '/roles', element: <RolesPage /> },
-  { path: '/permissions', element: <PermissionsPage /> },
-  { path: '/menus', element: <MenusPage /> },
-  { path: '/submenus', element: <SubmenusPage /> },
-  { path: '/catalog', element: <CatalogPage /> },
-  { path: '/catalog/products', element: <ProductsPage /> },
-  { path: '/catalog/categories', element: <CategoriesPage /> },
+  { path: '/users', element: <LazyPage component={UsersPage} /> },
+  { path: '/roles', element: <LazyPage component={RolesPage} /> },
+  { path: '/permissions', element: <LazyPage component={PermissionsPage} /> },
+  { path: '/menus', element: <LazyPage component={MenusPage} /> },
+  { path: '/submenus', element: <LazyPage component={SubmenusPage} /> },
+  { path: '/catalog', element: <LazyPage component={CatalogPage} /> },
+  { path: '/catalog/products', element: <LazyPage component={ProductsPage} /> },
+  { path: '/catalog/categories', element: <LazyPage component={CategoriesPage} /> },
   { path: '/products', element: <Navigate to="/catalog/products" replace /> },
   { path: '/categories', element: <Navigate to="/catalog/categories" replace /> },
-  { path: '/customers', element: <CustomersPage /> },
-  { path: '/sales', element: <SalesPage /> },
-  { path: '/appointments', element: <AppointmentsPage /> },
-  { path: '/work-orders', element: <WorkOrdersPage /> },
-  { path: '/workers', element: <WorkersPage /> },
-  { path: '/cash/categories', element: <CashCategoriesPage /> },
-  { path: '/cash/movements', element: <CashMovementsPage /> },
-  { path: '/settings', element: <SettingsPage /> },
-  { path: '/audit-logs', element: <AuditLogsPage /> },
-  { path: '/files', element: <FilesPage /> },
-  { path: '/system', element: <SystemPage /> },
+  { path: '/customers', element: <LazyPage component={CustomersPage} /> },
+  { path: '/sales', element: <LazyPage component={SalesPage} /> },
+  { path: '/appointments', element: <LazyPage component={AppointmentsPage} /> },
+  { path: '/work-orders', element: <LazyPage component={WorkOrdersPage} /> },
+  { path: '/workers', element: <LazyPage component={WorkersPage} /> },
+  { path: '/cash/categories', element: <LazyPage component={CashCategoriesPage} /> },
+  { path: '/cash/movements', element: <LazyPage component={CashMovementsPage} /> },
+  { path: '/settings', element: <LazyPage component={SettingsPage} /> },
+  { path: '/audit-logs', element: <LazyPage component={AuditLogsPage} /> },
+  { path: '/files', element: <LazyPage component={FilesPage} /> },
+  { path: '/system', element: <LazyPage component={SystemPage} /> },
 ];
