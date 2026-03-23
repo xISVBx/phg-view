@@ -44,7 +44,7 @@ jobs:
           key: ${{ secrets.VPS_SSH_KEY }}
           port: ${{ secrets.VPS_PORT }}
           source: "dist/*"
-          target: "/opt/deployments/phg-view/dist"
+          target: "/opt/deployments/phg-view"
 
       - name: Publish build
         uses: appleboy/ssh-action@v1.0.3
