@@ -74,7 +74,7 @@ function normalizeProduct(raw: unknown): ProductItem {
 }
 
 export async function listProducts(query: ProductsQuery): Promise<ProductsListResponse> {
-  const response = await http.get<unknown>(`/api/v1/products${toQueryString(query)}`);
+  const response = await http.get<unknown>(`/v1/products${toQueryString(query)}`);
   const data = getEnvelopeData<unknown[]>(response);
   const meta = getEnvelopeMeta<ProductsListResponse['meta']>(response);
 
@@ -85,7 +85,7 @@ export async function listProducts(query: ProductsQuery): Promise<ProductsListRe
 }
 
 export async function createProduct(payload: CreateProductPayload): Promise<ProductResponse> {
-  const response = await http.post<unknown>('/api/v1/products', payload);
+  const response = await http.post<unknown>('/v1/products', payload);
   const data = getEnvelopeData<unknown>(response);
 
   return {
@@ -94,7 +94,7 @@ export async function createProduct(payload: CreateProductPayload): Promise<Prod
 }
 
 export async function getProduct(id: string): Promise<ProductResponse> {
-  const response = await http.get<unknown>(`/api/v1/products/${id}`);
+  const response = await http.get<unknown>(`/v1/products/${id}`);
   const data = getEnvelopeData<unknown>(response);
 
   return {
@@ -103,7 +103,7 @@ export async function getProduct(id: string): Promise<ProductResponse> {
 }
 
 export async function updateProduct(id: string, payload: UpdateProductPayload): Promise<ProductResponse> {
-  const response = await http.put<unknown>(`/api/v1/products/${id}`, payload);
+  const response = await http.put<unknown>(`/v1/products/${id}`, payload);
   const data = getEnvelopeData<unknown>(response);
 
   return {
@@ -112,9 +112,9 @@ export async function updateProduct(id: string, payload: UpdateProductPayload): 
 }
 
 export async function activateProduct(id: string): Promise<void> {
-  await http.patch(`/api/v1/products/${id}/activate`);
+  await http.patch(`/v1/products/${id}/activate`);
 }
 
 export async function deactivateProduct(id: string): Promise<void> {
-  await http.patch(`/api/v1/products/${id}/deactivate`);
+  await http.patch(`/v1/products/${id}/deactivate`);
 }

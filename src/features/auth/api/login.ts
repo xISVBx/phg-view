@@ -11,7 +11,7 @@ type LoginResponse = {
 };
 
 export async function login(payload: LoginInput): Promise<LoginResult> {
-  const raw = await http.post<LoginResponse>('/api/v1/auth/login', payload);
+  const raw = await http.post<LoginResponse>('/v1/auth/login', payload);
   const token = extractAccessToken(raw);
 
   if (!token) {

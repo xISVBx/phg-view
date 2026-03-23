@@ -68,7 +68,7 @@ function normalizeRolePermission(raw: unknown) {
 }
 
 export async function listRoles(query: RolesQuery): Promise<RolesListResponse> {
-  const response = await http.get<unknown>(`/api/v1/roles${toQueryString(query)}`);
+  const response = await http.get<unknown>(`/v1/roles${toQueryString(query)}`);
   const data = getEnvelopeData<unknown[]>(response);
   const meta = getEnvelopeMeta<RolesListResponse['meta']>(response);
 
@@ -79,7 +79,7 @@ export async function listRoles(query: RolesQuery): Promise<RolesListResponse> {
 }
 
 export async function createRole(payload: CreateRolePayload): Promise<RoleResponse> {
-  const response = await http.post<unknown>('/api/v1/roles', payload);
+  const response = await http.post<unknown>('/v1/roles', payload);
   const data = getEnvelopeData<unknown>(response);
 
   return {
@@ -88,7 +88,7 @@ export async function createRole(payload: CreateRolePayload): Promise<RoleRespon
 }
 
 export async function getRolePermissions(roleId: string): Promise<RolePermissionsResponse> {
-  const response = await http.get<unknown>(`/api/v1/roles/${roleId}/permissions`);
+  const response = await http.get<unknown>(`/v1/roles/${roleId}/permissions`);
   const data = getEnvelopeData<unknown[]>(response);
 
   return {
@@ -97,5 +97,5 @@ export async function getRolePermissions(roleId: string): Promise<RolePermission
 }
 
 export async function setRolePermissions(roleId: string, items: RolePermissionSetItem[]): Promise<void> {
-  await http.put<unknown>(`/api/v1/roles/${roleId}/permissions`, { items });
+  await http.put<unknown>(`/v1/roles/${roleId}/permissions`, { items });
 }

@@ -37,7 +37,7 @@ function normalizeCategory(raw: unknown): ProductCategoryItem {
 }
 
 export async function listProductCategories(): Promise<ProductCategoryItem[]> {
-  const response = await http.get<unknown>('/api/v1/categories?page=1&pageSize=100&sort=name&dir=asc');
+  const response = await http.get<unknown>('/v1/categories?page=1&pageSize=100&sort=name&dir=asc');
   const data = getEnvelopeData<unknown[]>(response);
   return Array.isArray(data) ? data.map(normalizeCategory).filter((item) => item.id) : [];
 }

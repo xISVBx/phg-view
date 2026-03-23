@@ -6,6 +6,6 @@ type MeResponse = {
 };
 
 export async function me(): Promise<AuthUser | null> {
-  const raw = await http.get<MeResponse>('/api/v1/auth/me');
+  const raw = await http.get<MeResponse>('/v1/auth/me');
   return raw?.data ?? null;
 }

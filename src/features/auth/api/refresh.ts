@@ -18,7 +18,7 @@ export type RefreshResult = {
 };
 
 export async function refresh(refreshToken: string): Promise<RefreshResult> {
-  const raw = await http.post<RefreshResponse>('/api/v1/auth/refresh', { refreshToken });
+  const raw = await http.post<RefreshResponse>('/v1/auth/refresh', { refreshToken });
   const token = extractAccessToken(raw);
 
   if (!token) {

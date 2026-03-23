@@ -50,19 +50,19 @@ function normalizePermission(raw: unknown): SecurityPermissionItem {
 }
 
 export async function listMenusCatalog(): Promise<SecurityMenuItem[]> {
-  const response = await http.get<ListResponse<unknown> | unknown>('/api/v1/menus?page=1&pageSize=100&sort=name&dir=asc');
+  const response = await http.get<ListResponse<unknown> | unknown>('/v1/menus?page=1&pageSize=100&sort=name&dir=asc');
   const data = getEnvelopeData<unknown[]>(response);
   return (Array.isArray(data) ? data : []).map(normalizeMenu).filter((item) => item.id);
 }
 
 export async function listSubMenusCatalog(): Promise<SecuritySubMenuItem[]> {
-  const response = await http.get<ListResponse<unknown> | unknown>('/api/v1/submenus?page=1&pageSize=150&sort=name&dir=asc');
+  const response = await http.get<ListResponse<unknown> | unknown>('/v1/submenus?page=1&pageSize=150&sort=name&dir=asc');
   const data = getEnvelopeData<unknown[]>(response);
   return (Array.isArray(data) ? data : []).map(normalizeSubMenu).filter((item) => item.id && item.menuId);
 }
 
 export async function listPermissionsCatalog(): Promise<SecurityPermissionItem[]> {
-  const response = await http.get<ListResponse<unknown> | unknown>('/api/v1/permissions?page=1&pageSize=150&sort=name&dir=asc');
+  const response = await http.get<ListResponse<unknown> | unknown>('/v1/permissions?page=1&pageSize=150&sort=name&dir=asc');
   const data = getEnvelopeData<unknown[]>(response);
   return (Array.isArray(data) ? data : []).map(normalizePermission).filter((item) => item.id);
 }

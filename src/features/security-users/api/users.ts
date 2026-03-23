@@ -117,7 +117,7 @@ function normalizeUser(raw: unknown): UserItem {
 }
 
 export async function listUsers(query: UsersQuery): Promise<UsersListResponse> {
-  const response = await http.get<unknown>(`/api/v1/users${toQueryString(query)}`);
+  const response = await http.get<unknown>(`/v1/users${toQueryString(query)}`);
   const data = getEnvelopeData<unknown[]>(response);
   const meta = getEnvelopeMeta<UsersListResponse['meta']>(response);
 
@@ -128,7 +128,7 @@ export async function listUsers(query: UsersQuery): Promise<UsersListResponse> {
 }
 
 export async function createUser(payload: CreateUserPayload): Promise<UserResponse> {
-  const response = await http.post<unknown>('/api/v1/users', payload);
+  const response = await http.post<unknown>('/v1/users', payload);
   const data = getEnvelopeData<unknown>(response);
 
   return {
@@ -137,7 +137,7 @@ export async function createUser(payload: CreateUserPayload): Promise<UserRespon
 }
 
 export async function getUser(id: string): Promise<UserResponse> {
-  const response = await http.get<unknown>(`/api/v1/users/${id}`);
+  const response = await http.get<unknown>(`/v1/users/${id}`);
   const data = getEnvelopeData<unknown>(response);
 
   return {
@@ -146,7 +146,7 @@ export async function getUser(id: string): Promise<UserResponse> {
 }
 
 export async function updateUser(id: string, payload: UpdateUserPayload): Promise<UserResponse> {
-  const response = await http.put<unknown>(`/api/v1/users/${id}`, payload);
+  const response = await http.put<unknown>(`/v1/users/${id}`, payload);
   const data = getEnvelopeData<unknown>(response);
 
   return {
@@ -155,7 +155,7 @@ export async function updateUser(id: string, payload: UpdateUserPayload): Promis
 }
 
 export async function getUserRoles(id: string): Promise<UserRolesResponse> {
-  const response = await http.get<unknown>(`/api/v1/users/${id}/roles`);
+  const response = await http.get<unknown>(`/v1/users/${id}/roles`);
   const data = getEnvelopeData<unknown[]>(response);
 
   return {

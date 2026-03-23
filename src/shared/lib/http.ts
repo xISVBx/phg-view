@@ -2,7 +2,7 @@ import axios, { AxiosError, AxiosHeaders } from 'axios';
 import type { InternalAxiosRequestConfig } from 'axios';
 import type { ProblemDetails } from '../types/problem-details';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:8080';
+const API_BASE_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:8080/api';
 
 type RequestOptions = {
   method?: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
@@ -50,7 +50,7 @@ const client = axios.create({
 
 function isAuthEndpoint(url?: string): boolean {
   if (!url) return false;
-  return url.includes('/api/v1/auth/login') || url.includes('/api/v1/auth/refresh');
+  return url.includes('/v1/auth/login') || url.includes('/v1/auth/refresh');
 }
 
 function asProblemDetails(payload: unknown): ProblemDetails | undefined {
